@@ -8,11 +8,6 @@ namespace ShoppingList.Tests;
 
 public class ShoppingListServiceTests
 {
-    private readonly IShoppingListService systemUnderTest;
-    public ShoppingListServiceTests()
-    {
-        systemUnderTest = new ShoppingListService();
-    }
     /// - GetAll_WhenEmpty_ShouldReturnEmptyList
     /// - GetAll_WithItems_ShouldReturnAllItems
     /// - GetAll_ShouldNotReturnMoreThanActualItemCount
@@ -29,17 +24,22 @@ public class ShoppingListServiceTests
         //Assert
         Assert.Empty(actualShoppingList);
     }
-    [Fact]
-    public void GetAll_WithItems_ShouldReturnAllItems()
+    [Theory]
+    [InlineData(5)]
+    public void GetAll_WithItems_ShouldReturnAllItemsCount(int expected)
     {
-        //Arrange
-        int expectedNumberOfItems = 4;
+        // Arrange
+        var service = new ShoppingListService();
+        for (int i = 0; i < expected; i++)
+        {
+            service.Add("Banan", 1, "En fin banan");
+        }
         
         //Act
-        var actualShoppingList = systemUnderTest.GetAll();
+        var actual = service.GetAll();
 
         //Assert
-        Assert.Equal(expectedNumberOfItems, actualShoppingList.Count);
+        Assert.Equal(expected, actual.Count);
 
 
     }
@@ -48,6 +48,7 @@ public class ShoppingListServiceTests
     public void AddWithValidInputShouldReturnItem()
     {
         // Arrange
+        var service = new ShoppingListService();
         var expectedItem = new ShoppingItem()
         {
             Name = "Banan",
@@ -56,7 +57,7 @@ public class ShoppingListServiceTests
         };
 
         // Act
-        var actual = systemUnderTest.Add(expectedItem.Name, expectedItem.Quantity, expectedItem.Notes);
+        var actual = service.Add(expectedItem.Name, expectedItem.Quantity, expectedItem.Notes);
 
         // Assert
         Assert.NotNull(expectedItem);
@@ -67,15 +68,31 @@ public class ShoppingListServiceTests
     [Fact]
     public void Add_ShouldGenerateUniqueId()
     {
+        // Arrange
+        var service = new ShoppingListService();
+        
         //Act
-        var item1 = systemUnderTest.Add("Banan", 1, "En fin banan");
-        var item2 = systemUnderTest.Add("Banan", 1, "En fin banan");
+        var item1 = service.Add("Banan", 1, "En fin banan");
+        var item2 = service.Add("Banan", 1, "En fin banan");
 
         //Assert
 
         Assert.NotEqual(item1.Id, item2.Id);
     }
-    
+
+
+
+    private ShoppingItem[] AddTestData(IShoppingListService service)
+    {
+        var items = new ShoppingItem[5];
+        service.Add("Banan", 1, "En fin banan");
+        service.Add("Aples", 2, "En fin apple");
+        service.Add("Kaffe", 3, "En fin kaffe");
+        service.Add("Milk", 4, "En fin milk");
+        service.Add("Kaka", 5, "En fin kaka");
+
+        return items;
+    }
 
 }
 

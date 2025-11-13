@@ -13,14 +13,14 @@ public class ShoppingListService : IShoppingListService
     {
         // Initialize with demo data for UI demonstration
         // TODO: Students can remove or comment this out when running unit tests
-        _items = GenerateDemoItems();
+        //_items = GenerateDemoItems();
         _nextIndex = 4; // We have 4 demo items initialized
     }
 
     public IReadOnlyList<ShoppingItem> GetAll()
     {
         // TODO: Students - Return all items from the array (up to _nextIndex)
-        return [];
+        return _items;
     }
 
     public ShoppingItem? GetById(string id)
@@ -37,7 +37,7 @@ public class ShoppingListService : IShoppingListService
             Quantity = quantity,
             Notes = notes,
         };
-    
+        
     // Return the created item
     return item;
     }
@@ -84,41 +84,10 @@ public class ShoppingListService : IShoppingListService
         return false;
     }
 
-    private ShoppingItem[] GenerateDemoItems()
+    public ShoppingItem[] _TEST_items()
     {
-        var items = new ShoppingItem[5];
-        items[0] = new ShoppingItem
-        {
-            Id = Guid.NewGuid().ToString(),
-            Name = "Dishwasher tablets",
-            Quantity = 1,
-            Notes = "80st/pack - Rea",
-            IsPurchased = false
-        };
-        items[1] = new ShoppingItem
-        {
-            Id = Guid.NewGuid().ToString(),
-            Name = "Ground meat",
-            Quantity = 1,
-            Notes = "2kg - origin Sweden",
-            IsPurchased = false
-        };
-        items[2] = new ShoppingItem
-        {
-            Id = Guid.NewGuid().ToString(),
-            Name = "Apples",
-            Quantity = 10,
-            Notes = "Pink Lady",
-            IsPurchased = false
-        };
-        items[3] = new ShoppingItem
-        {
-            Id = Guid.NewGuid().ToString(),
-            Name = "Toothpaste",
-            Quantity = 1,
-            Notes = "Colgate",
-            IsPurchased = false
-        };
-        return items;
+        return _items;
     }
+
+    
 }
