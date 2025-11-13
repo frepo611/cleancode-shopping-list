@@ -16,7 +16,7 @@ public class ShoppingListServiceTests
     public void GetAll_WhenEmpty_ShouldReturnEmptyList()
     {
         //Arrange
-        ShoppingListService service = new ShoppingListService();
+        var service = new ShoppingListService();
 
         //Act
         var actualShoppingList = service.GetAll();

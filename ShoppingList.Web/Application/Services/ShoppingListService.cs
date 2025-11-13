@@ -19,8 +19,13 @@ public class ShoppingListService : IShoppingListService
 
     public IReadOnlyList<ShoppingItem> GetAll()
     {
-        // TODO: Students - Return all items from the array (up to _nextIndex)
-        return _items;
+        var result = new List<ShoppingItem>();
+        
+        for (int i = 0; i < _nextIndex; i++)
+        {
+            result.Add(_items[i]);
+        }
+        return result;
     }
 
     public ShoppingItem? GetById(string id)
@@ -31,17 +36,19 @@ public class ShoppingListService : IShoppingListService
 
     public ShoppingItem? Add(string name, int quantity, string? notes)
     {
+        // Expand array if full
         var item = new ShoppingItem
         {
             Name = name,
             Quantity = quantity,
             Notes = notes,
         };
-
+        
         _items[_nextIndex] = item;
         _nextIndex++;
-
-        return item;
+        
+    // Return the created item
+    return item;
     }
 
     public ShoppingItem? Update(string id, string name, int quantity, string? notes)
