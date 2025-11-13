@@ -6,7 +6,7 @@ public interface IShoppingListService
 {
     IReadOnlyList<ShoppingItem> GetAll();
     ShoppingItem? GetById(string id);
-    ShoppingItem? Add(string name, int quantity, string? notes);
+    ShoppingItem? Add(string name, int quantity, string? notes); //
     ShoppingItem? Update(string id, string name, int quantity, string? notes);
     bool Delete(string id);
     IReadOnlyList<ShoppingItem> Search(string query);

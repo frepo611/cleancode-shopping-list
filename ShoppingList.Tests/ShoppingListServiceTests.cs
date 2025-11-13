@@ -1,11 +1,42 @@
-﻿using ShoppingList.Application.Services;
+﻿using ShoppingList.Application.Interfaces;
+using ShoppingList.Application.Services;
 using ShoppingList.Domain.Models;
 using Xunit;
 
 namespace ShoppingList.Tests;
 
+
+public class ShoppingListServiceTests : IShoppingListService
+{
+    private readonly IShoppingListService systemUnderService;
+    public ShoppingListServiceTests()
+    {
+        systemUnderService = new ShoppingListService();
+    }
+    [Fact]
+    public void AddWithValidInputShouldReturnItem()
+    {
+        var expectedItem = systemUnderService.Add
+        (
+            Quantity = 1,
+            Name = "Banan",
+            Notes = "en god frukt"
+        );
+        // Arrange
+        var actual = ShoppingListService.Add(expectedItem.Name, expectedItem.Quantity, expectedItem.Notes );
+
+
+
+        // Act
+        Assert.Equal(actual, expectedItem);
+
+
+        // Assert
+    }
+}
 /// <summary>
 /// Unit tests for ShoppingListService.
+
 ///
 /// IMPORTANT: Write your tests here using Test Driven Development (TDD)
 ///
