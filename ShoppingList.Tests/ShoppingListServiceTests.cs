@@ -6,7 +6,7 @@ using Xunit;
 namespace ShoppingList.Tests;
 
 
-public class ShoppingListServiceTests : IShoppingListService
+public class ShoppingListServiceTests
 {
     private readonly IShoppingListService systemUnderService;
     public ShoppingListServiceTests()
@@ -16,22 +16,22 @@ public class ShoppingListServiceTests : IShoppingListService
     [Fact]
     public void AddWithValidInputShouldReturnItem()
     {
-        var expectedItem = systemUnderService.Add
-        (
+        // Arrange
+        var expectedItem = new ShoppingItem()
+        {
             Quantity = 1,
             Name = "Banan",
             Notes = "en god frukt"
-        );
-        // Arrange
-        var actual = ShoppingListService.Add(expectedItem.Name, expectedItem.Quantity, expectedItem.Notes );
-
-
+        };
 
         // Act
-        Assert.Equal(actual, expectedItem);
-
+        var actual = systemUnderService.Add(expectedItem.Name, expectedItem.Quantity, expectedItem.Notes );
 
         // Assert
+        Assert.Equal(expectedItem, actual);
+        Assert.NotNull(expectedItem);
+        Assert.Equal(expectedItem.Name, actual!.Name);
+        Assert.Equal(expectedItem.Quantity, actual.Quantity);
     }
 }
 /// <summary>
@@ -124,24 +124,3 @@ public class ShoppingListServiceTests : IShoppingListService
 /// - Reorder_ShouldChangeItemOrder
 /// - Reorder_WithEmptyList_ShouldReturnFalse
 /// </summary>
-public class ShoppingListServiceTests
-{
-    // TODO: Write your tests here following the TDD workflow
-
-    // Example test structure:
-    // [Fact]
-    // public void Add_WithValidInput_ShouldReturnItem()
-    // {
-    //     // Arrange
-    //     var service = new ShoppingListService();
-    //
-    //     // Act
-    //     var item = service.Add("Milk", 2, "Lactose-free");
-    //
-    //     // Assert
-    //     Assert.NotNull(item);
-    //     Assert.Equal("Milk", item!.Name);
-    //     Assert.Equal(2, item.Quantity);
-    // }
-}
-
