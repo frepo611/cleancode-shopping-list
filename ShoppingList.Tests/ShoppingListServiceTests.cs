@@ -16,16 +16,17 @@ public class ShoppingListServiceTests
     public void GetAll_WhenEmpty_ShouldReturnEmptyList()
     {
         //Arrange
-        ShoppingListService emptyShoppingListService = new ShoppingListService();
+        var service = new ShoppingListService();
 
         //Act
-        var actualShoppingList = emptyShoppingListService.GetAll();
+        var actualShoppingList = service.GetAll();
 
         //Assert
         Assert.Empty(actualShoppingList);
     }
     [Theory]
     [InlineData(5)]
+    [InlineData(10)]
     public void GetAll_WithItems_ShouldReturnAllItemsCount(int expected)
     {
         // Arrange
@@ -37,11 +38,11 @@ public class ShoppingListServiceTests
         
         //Act
         var actual = service.GetAll();
+        var actualCount = actual.Count;
 
         //Assert
-        Assert.Equal(expected, actual.Count);
-
-
+        Assert.Equal(actualCount, actual.Count);
+        
     }
 
     [Fact]

@@ -14,13 +14,20 @@ public class ShoppingListService : IShoppingListService
         // Initialize with demo data for UI demonstration
         // TODO: Students can remove or comment this out when running unit tests
         //_items = GenerateDemoItems();
-        _nextIndex = 4; // We have 4 demo items initialized
+        // _nextIndex = 4; // We have 4 demo items initialized
+        _items = new ShoppingItem[10];
+        _nextIndex = 0;
     }
 
     public IReadOnlyList<ShoppingItem> GetAll()
     {
         // TODO: Students - Return all items from the array (up to _nextIndex)
-        return _items;
+        if (_nextIndex == 0)
+        {
+            return [];
+        }
+        
+        return _items;   
     }
 
     public ShoppingItem? GetById(string id)
@@ -37,6 +44,9 @@ public class ShoppingListService : IShoppingListService
             Quantity = quantity,
             Notes = notes,
         };
+        
+        _items = new ShoppingItem[_nextIndex]  ; 
+        _nextIndex++;     
         
     // Return the created item
     return item;
