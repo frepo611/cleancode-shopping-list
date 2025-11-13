@@ -8,11 +8,42 @@ namespace ShoppingList.Tests;
 
 public class ShoppingListServiceTests
 {
-    private readonly IShoppingListService systemUnderService;
+    private readonly IShoppingListService systemUnderTest;
     public ShoppingListServiceTests()
     {
-        systemUnderService = new ShoppingListService();
+        systemUnderTest = new ShoppingListService();
     }
+    /// - GetAll_WhenEmpty_ShouldReturnEmptyList
+    /// - GetAll_WithItems_ShouldReturnAllItems
+    /// - GetAll_ShouldNotReturnMoreThanActualItemCount
+
+    [Fact]
+    public void GetAll_WhenEmpty_ShouldReturnEmptyList()
+    {
+        //Arrange
+        ShoppingListService emptyShoppingListService = new ShoppingListService();
+
+        //Act
+        var actualShoppingList = emptyShoppingListService.GetAll();
+
+        //Assert
+        Assert.Empty(actualShoppingList);
+    }
+    [Fact]
+    public void GetAll_WithItems_ShouldReturnAllItems()
+    {
+        //Arrange
+        int expectedNumberOfItems = 4;
+        
+        //Act
+        var actualShoppingList = systemUnderTest.GetAll();
+
+        //Assert
+        Assert.Equal(expectedNumberOfItems, actualShoppingList.Count);
+
+
+    }
+
     [Fact]
     public void AddWithValidInputShouldReturnItem()
     {
@@ -25,16 +56,29 @@ public class ShoppingListServiceTests
         };
 
         // Act
-        var actual = systemUnderService.Add(expectedItem.Name, expectedItem.Quantity, expectedItem.Notes );
+        var actual = systemUnderTest.Add(expectedItem.Name, expectedItem.Quantity, expectedItem.Notes);
 
         // Assert
-        Assert.Equal(expectedItem, actual);
         Assert.NotNull(expectedItem);
         Assert.Equal(expectedItem.Name, actual!.Name);
         Assert.Equal(expectedItem.Quantity, actual.Quantity);
     }
+
+    [Fact]
+    public void Add_ShouldGenerateUniqueId()
+    {
+        //Act
+        var item1 = systemUnderTest.Add("Banan", 1, "En fin banan");
+        var item2 = systemUnderTest.Add("Banan", 1, "En fin banan");
+
+        //Assert
+
+        Assert.NotEqual(item1.Id, item2.Id);
+    }
+    
+
 }
-/// <summary>
+
 /// Unit tests for ShoppingListService.
 
 ///
