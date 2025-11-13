@@ -6,8 +6,9 @@ namespace ShoppingList.Application.Services;
 public class ShoppingListService : IShoppingListService
 {
     private ShoppingItem[] _items;
+    
     private int _nextIndex;
-
+    
     public ShoppingListService()
     {
         // Initialize with demo data for UI demonstration
@@ -28,11 +29,17 @@ public class ShoppingListService : IShoppingListService
         return null;
     }
 
-    public ShoppingItem? Add(string name, int quantity, string? notes)//
+    public ShoppingItem? Add(string name, int quantity, string? notes)
     {
-        // TODO: Students - Implement this method
-        // Return the created item
-        return null;
+        var item = new ShoppingItem
+        {
+            Name = name,
+            Quantity = quantity,
+            Notes = notes,
+        };
+    
+    // Return the created item
+    return item;
     }
 
     public ShoppingItem? Update(string id, string name, int quantity, string? notes)

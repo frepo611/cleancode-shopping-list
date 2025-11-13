@@ -19,8 +19,8 @@ public class ShoppingListServiceTests
         // Arrange
         var expectedItem = new ShoppingItem()
         {
-            Quantity = 1,
             Name = "Banan",
+            Quantity = 1,
             Notes = "en god frukt"
         };
 
