@@ -8,8 +8,6 @@ namespace ShoppingList.Tests;
 
 public class ShoppingListServiceTests
 {
-    /// - GetAll_WhenEmpty_ShouldReturnEmptyList
-    /// - GetAll_WithItems_ShouldReturnAllItems
     /// - GetAll_ShouldNotReturnMoreThanActualItemCount
 
     [Fact]

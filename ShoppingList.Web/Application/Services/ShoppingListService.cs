@@ -9,12 +9,16 @@ public class ShoppingListService : IShoppingListService
 
     private int _nextIndex;
 
+    public int ItemCount { get; private set; }
+
     
 
     public ShoppingListService()
     {
         _items = new ShoppingItem[10];
         _nextIndex = 0;
+        
+        ItemCount = 0;
     }
 
     public IReadOnlyList<ShoppingItem> GetAll()
@@ -46,6 +50,7 @@ public class ShoppingListService : IShoppingListService
         
         _items[_nextIndex] = item;
         _nextIndex++;
+        ItemCount++;
         
     // Return the created item
     return item;
