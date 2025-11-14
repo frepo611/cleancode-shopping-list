@@ -3,9 +3,9 @@ name: .NET CI MIXED
 on: 
   workflow_dispatch: {}
       
-  pull_request:
-    branches:
-      [main]
+#  pull_request:
+ #   branches:
+ #     [main]
  
 jobs:
   test_from_matrix:
