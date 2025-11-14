@@ -11,9 +11,17 @@ on:
       [main]
  
 jobs:
-  build_and_test:
-      name: Bygg och testa
-      runs-on: ubuntu-latest
+  build_from_matrix:
+
+    
+      name: Build release and debug versions for Ubuntu and Windows
+
+      strategy:
+        matrix:
+          os: [ubuntu-latest, windows-latest]
+          build-configuration: [Debug, Release]
+      
+      runs-on: ${{ matrix.os }}
       
       steps:
         - name: Echo Hej
@@ -22,10 +30,10 @@ jobs:
         - name: Checkout code
           uses: actions/checkout@v5
 
-        - name: Setup .NET 9
-          uses: actions/setup-dotnet@v5.0.0
-          with:
-              dotnet-version: "9.0"
+        #- name: Setup .NET 9
+        #  uses: actions/setup-dotnet@v5.0.0
+        #  with:
+        #      dotnet-version: "9.0"
 
         - name: Run tests
           run: dotnet test 
