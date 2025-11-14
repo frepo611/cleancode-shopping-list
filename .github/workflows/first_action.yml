@@ -1,16 +1,19 @@
 name: .NET CI MIXED
 
 on: 
-    workflow_dispatch: {}
-    push:
-        branches: [main]
+  workflow_dispatch: {}
+    
+#    push:
+#       branches: [main]
         
-    pull_request:
-        branches:
-            [main]
+  pull_request:
+    branches:
+      [main]
  
 jobs:
-  minsta_job_id:
-    runs-on: ubuntu-latest
-    steps:
-        - run: echo "HEJ"
+  echo_hej:
+      name: Echo Hej
+      runs-on: ubuntu-latest
+      
+      steps:
+            - run: echo "HEJ"
