@@ -6,6 +6,8 @@ jobs:
     print_context_values:
 
         runs-on: ubuntu-latest
+        env:
+            GITHUB_CONTEXT: ${{ toJSON(github.event) }}
 
         steps:
             - run: echo ${{ github.job }}
@@ -15,4 +17,5 @@ jobs:
             - run: echo ${{ runner.os }}
             - run: echo ${{ runner.arch }}
             - run: echo ${{ runner.os }}
+            - run: echo $GITHUB_CONTEXT 
 
