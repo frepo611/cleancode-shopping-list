@@ -15,7 +15,6 @@ jobs:
       strategy:
         matrix:
           os: [ubuntu-latest, windows-latest]
-          build-configuration: [Debug, Release]
       
       runs-on: ${{ matrix.os }}
       
@@ -26,15 +25,20 @@ jobs:
         - name: Checkout code
           uses: actions/checkout@v5
 
+        - name: Restore
+          run: dotnet restore
+
         - name: Build projects
-          run: dotnet build
+          run: dotnet build --no-restore
 
         - name: Run tests
-          run: dotnet test
+          run: dotnet test --no-build
 
   build-debug-and-relase:
 
     name: Build Debug and Release for Ubuntu and Windows
+
+    needs: test_from_matrix
 
     strategy:
         matrix:
