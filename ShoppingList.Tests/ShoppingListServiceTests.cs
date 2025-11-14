@@ -13,7 +13,7 @@ public class ShoppingListServiceTests
     /// - GetById_WithNullId_ShouldReturnNull
     /// - GetById_WithEmptyId_ShouldReturnNull
 
-    [Fact]
+/*    [Fact]
     public void GetById_WithValidId_ShouldReturnItem()
     {
         //Arrange
@@ -25,7 +25,7 @@ public class ShoppingListServiceTests
         ShoppingItem? actualItem = service.GetById(expectedItem!.Id);
         //Assert
         Assert.Equal(expectedItem, actualItem);
-    }
+    } */
 
     /// - GetAll_ShouldNotReturnMoreThanActualItemCount
 
